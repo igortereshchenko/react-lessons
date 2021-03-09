@@ -1,0 +1,58 @@
+<html>
+  
+
+<body>
+
+    <div id='app'></div>
+    
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+
+        class StateClass extends React.Component{
+
+            constructor(props){
+                super(props);
+
+                this.state = {text: 'Hello'};
+            }
+
+            press1(){
+                this.state.welcome = 'New state';
+            }
+
+            press2(){
+                console.log(this.state.welcome);
+            }
+
+            press3(){
+                this.setState({text:'New state correct'})
+            }            
+
+            render(){
+                return <div>    
+                    State is: {this.state.text} 
+                    <button onClick = {()=>this.press1()}>Change state!</button>                                    
+                    <button onClick = {()=>this.press2()}>Print state!</button>                                    
+                    <button onClick = {()=>this.press3()}>Correct change state!</button>                                    
+
+                </div>;
+            }
+        }
+
+      
+        ReactDOM.render(<StateClass />, document.getElementById('app'))
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>

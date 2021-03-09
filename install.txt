@@ -1,0 +1,15 @@
+intsall react
+npm install react
+npm install react-dom
+npm install webpack-dev-server
+npm install webpack-cli --save
+
+install react compiler
+npm install babel-core --save-dev
+npm install babel-loader --save-dev
+npm install babel-preset-env --save-dev
+npm install babel-preset-react --save-dev
+npm install babel-webpack-plugin --save-dev
+
+install nodemon 
+npm install nodemon -g

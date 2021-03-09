@@ -1,0 +1,56 @@
+<html>
+    <head>
+    <style>
+        .human{
+            border: 1px #000 solid;
+            color: red;
+        }
+    </style>
+
+    </head>
+
+<body>
+
+    <div id='app'></div>
+    <div id='dict'></div>
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        ReactDOM.render(<h1>2+2 = { 2+2 }</h1>, document.getElementById('app'))
+
+    </script>
+
+
+    <script type="text/babel">
+
+        const human = {
+            id:1,
+            age:17,
+            name:'Bob',
+            toString: function(){
+                return  `${this.name} has age = ${this.age}`;
+            }
+        };
+
+        const class_name = `human`;
+
+        ReactDOM.render(
+                    <div id = {`human_`+human.id} class = {class_name}>    
+                        <p>{human.name}</p>
+                        <p>{human.toString()}</p>
+                    </div>
+        
+        , document.getElementById('dict'))
+
+    </script>
+
+
+
+
+</body>
+
+</html>

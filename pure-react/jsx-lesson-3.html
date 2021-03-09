@@ -1,0 +1,57 @@
+<html>
+  
+
+<body>
+
+    <div id='app'></div>
+    
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+
+        function Hello(properties){
+
+            return <div>
+                    <p>{properties.name}</p>
+                    <p>{properties.age}</p>                    
+                </div>;
+        }
+
+
+        const Hello2  = (properties)=>{
+
+            const {name, age} = properties;
+            return <div>
+                    <p>{name}</p>
+                    <p>{age}</p>                    
+                </div>;
+        }
+
+
+        class Hello3 extends React.Component{
+            render(){
+                return <div>
+                    <p>{this.props.name}</p>
+                    <p>{this.props.age}</p>                    
+                </div>;
+
+            }
+        }
+
+        Hello3.defaultProps = {name:'Bob', age:17};
+
+        ReactDOM.render(<Hello3 age='20' />, document.getElementById('app'))
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>
