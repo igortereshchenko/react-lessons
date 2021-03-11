@@ -12,6 +12,30 @@
 
     <script type="text/babel">
 
+
+        class SearchPlugin extends React.Component{
+
+            constructor(props){
+                super(props);
+                this.filterList = this.filterList.bind(this);
+            }
+
+            filterList(event){
+                var text = event.target.value.trim();
+                //call parent bind filter
+                //property filter with link on some function
+                this.props.filter(text);
+            }
+
+            render(){
+
+            return(
+                    <input placeholder="Search" onChange={this.filterList} />    
+                );
+            }
+        }
+
+
         class Human extends React.Component{
             // view for 1 Human
             render(){
@@ -29,18 +53,16 @@
             }
 
 
-            filterList(event){
+            filterList(text){
 
                 var filteredHumans = this.props.data.filter(function(item){
 
-                    var result = item['name'].toLowerCase().search(event.target.value.toLowerCase())!=-1;
+                    var result = item['name'].toLowerCase().search(text.toLowerCase())!=-1;
 
                     return result;
                 })
 
                 this.setState({items:filteredHumans});
-
-                // alert(this.state.items);
             }
 
             // view for list of Humans
@@ -49,12 +71,12 @@
 
                 return(
                     <div>
-                        <input placeholder="Search" onChange={this.filterList} />    
+                        <SearchPlugin filter={this.filterList}/>
 
                         <ul>
                             {
                                 this.state.items.map(function(item){
-                                    return <Human inn={item['inn']}  name = {item['name']}  key={item['inn']} />
+                                    return <Human inn={item['inn']}  name = {item['name']}  />
                                 })
                             }
                         </ul>
@@ -64,14 +86,15 @@
                 );
             }
         }
-       
+
+        
         const dataset = [
             {inn:1, name:'Bob'},
             {inn:2, name:'Boba'},
             {inn:3, name:'Boban'},
         ]
 
-        ReactDOM.render(<HumanList data = {dataset}/>, document.getElementById('app'))
+        ReactDOM.render(<HumanList data = {dataset} x={1} y={9} />, document.getElementById('app'))
 
     </script>
 
