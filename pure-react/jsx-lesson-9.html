@@ -21,15 +21,39 @@
 
         class HumanList extends React.Component{
 
+            constructor(props){
+                super(props);
+                this.state = {items:this.props.data};
+
+                this.filterList = this.filterList.bind(this);
+            }
+
+
+            filterList(event){
+
+                var filteredHumans = this.props.data.filter(function(item){
+
+                    var result = item['name'].toLowerCase().search(event.target.value.toLowerCase())!=-1;
+
+                    return result;
+                })
+
+                this.setState({items:filteredHumans});
+
+                // alert(this.state.items);
+            }
+
             // view for list of Humans
             // props.data=[Human1, Human2,...]
             render(){
 
                 return(
                     <div>
+                        <input placeholder="Search" onChange={this.filterList} />    
+
                         <ul>
                             {
-                                this.props.data.map(function(item){
+                                this.state.items.map(function(item){
                                     return <Human inn={item['inn']}  name = {item['name']}  key={item['inn']} />
                                 })
                             }
