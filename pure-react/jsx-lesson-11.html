@@ -1,0 +1,95 @@
+<html>
+
+
+<body>
+
+    <div id='app'></div>
+    
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class HumanForm extends React.Component{
+
+            constructor(props){
+                super(props);
+
+                this.validateName = this.validateName.bind(this);
+                this.validateAge = this.validateAge.bind(this);
+                this.onNameChange = this.onNameChange.bind(this);
+                this.onAgeChange = this.onAgeChange.bind(this);
+                this.onSubmit = this.onSubmit.bind(this);
+
+
+                this.state= {
+                    name:this.props.name,
+                    age: this.props.age,
+                    isNameValid:this.validateName(this.props.name),
+                    isAgeValid:this.validateAge(this.props.age),
+                }
+            }
+
+            validateName(name){
+                return name.length>2
+            }
+
+            validateAge(age){
+                return age>=0
+            }
+
+            onNameChange(e){
+                var name = e.target.value;
+                this.setState({name:name, isNameValid: this.validateName(name)})
+            }
+            onAgeChange(e){
+                var age = e.target.value;
+                this.setState({age:age, isAgeValid: this.validateAge(age)})
+
+            }
+
+            onSubmit(e){
+
+                e.preventDefault();
+                if (this.state.isAgeValid==true && this.state.isNameValid==true){
+                    alert('Sended');
+                }
+            }
+
+            render(){
+
+                var nameStyle = "green";
+                var ageStyle = "green";
+
+                if (!this.state.isAgeValid)
+                    ageStyle = "red";
+
+                if (!this.state.isNameValid)
+                    nameStyle = "red";
+
+
+                return (
+                    <form onSubmit = {this.onSubmit}>
+                        Name :<input type="text" value = {this.state.name}  onChange={this.onNameChange}  style={ {borderColor:nameStyle} } /> <br/>
+                        Age: <input type="text" value = {this.state.age}  onChange={this.onAgeChange} style={ {borderColor:ageStyle} } />  <br/>               
+                        <br/><br/>
+                        <input type="submit" value="Send" />
+                    </form>
+                );
+            }
+        }
+       
+       
+        ReactDOM.render(<HumanForm  name="Bob" age="13" />, document.getElementById('app'))
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<html>
+
+
+<body>
+
+    <div id='app'></div>
+    
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class HumanForm extends React.Component{
+
+            constructor(props){
+                super(props);
+
+     
+                this.onSubmit = this.onSubmit.bind(this);
+
+
+                this.nameField = React.createRef();
+                this.ageField = React.createRef();
+                this.form = React.createRef();
+                this.x = React.createRef();
+            }
+
+      
+
+            onSubmit(e){
+
+                e.preventDefault();
+                console.log(this.nameField);
+                console.log(this.nameField.current.value);
+                console.log(this.ageField);
+                console.log(this.ageField.current.value);
+
+            }
+
+            render(){
+
+
+                return (
+                    <form onSubmit = {this.onSubmit} ref ={this.form}>
+
+                        Name :<input type="text" ref={this.nameField}   /> <br/>
+                        Age: <input type="text" ref = {this.ageField}  />  <br/>               
+                        <br ref = {this.x}/><br/>
+                        <input type="submit" value="Send" />
+                    </form>
+                );
+            }
+        }
+       
+       
+        ReactDOM.render(<HumanForm  />, document.getElementById('app'))
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>

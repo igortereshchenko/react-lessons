@@ -1,0 +1,102 @@
+<html>
+
+
+<body>
+
+    <div id='app'></div>
+    
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.2.0/react-router-dom.min.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
+    <script type="text/babel">
+
+        const Route = ReactRouterDOM.Route;
+        const Router = ReactRouterDOM.BrowserRouter;
+        const Switch = ReactRouterDOM.Switch;
+
+
+        class About extends React.Component{
+            render(){
+                return (<h1>About</h1>);
+            }
+        }
+
+        class NotFound extends React.Component{
+            render(){
+                return (<h1>404 NotFound</h1>);
+            }
+        }
+
+        class MainPage extends React.Component{
+            render(){
+                return (<h1>MainPage</h1>);
+            }
+        }
+
+        class Human extends React.Component{
+            render(){
+                return (<h1>Human sub view</h1>);
+            }
+        }  
+        
+        class Car extends React.Component{
+            render(){
+                return (<h1>Car sub view</h1>);
+            }
+        }         
+        
+        class Phones extends React.Component{
+            render(){
+                return (<h1>Phones sub view</h1>);
+            }
+        }  
+        
+        class AllInfo extends React.Component{
+            render(){
+                return (
+                    <div>
+                        <h1>AllInfo</h1>
+                        <h1>bla bla bla</h1>
+                        <h1>Layout</h1>
+                        <Switch>
+                            <Route   exact path="/allinfo/phones" component={Phones} />
+                            <Route  path="/allinfo/human" component={Human} />
+                            <Route  path="/allinfo/car" component={Car} />                                                        
+
+
+                        </Switch>
+                    </div>
+                    );
+            }
+        }           
+
+
+
+       
+        ReactDOM.render(
+            <Router>
+                <Switch>
+                    <Route exact path="/" component={MainPage} />
+                    <Route path="/allinfo" component={AllInfo} />                    
+                    <Route exact path="/about" component={About} />
+                    <Route component={NotFound} />
+                </Switch>
+            </Router>    
+        
+        , document.getElementById('app'))
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>
