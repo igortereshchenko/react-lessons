@@ -13,12 +13,14 @@ ReactDOM.render(
 <rrd.BrowserRouter>
     <div>
         <Navigation />
+
         <rrd.Switch>
             <rrd.Route exact path='/' component={Home} />
             <rrd.Route exact path='/about' component={About} />            
             <rrd.Route  path='/humans' component={AllHumans} />                        
             <rrd.Route component={NotFound} />            
         </rrd.Switch>
+        
     </div>
 </rrd.BrowserRouter>,
 
