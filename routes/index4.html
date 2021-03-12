@@ -1,0 +1,183 @@
+<html>
+<head>
+    
+    <style>
+        .active{color:green}
+    </style>    
+    
+</head>
+
+<body>
+
+    <div id='app'></div>
+    
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.2.0/react-router-dom.min.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
+    <script type="text/babel">
+
+        const Route = ReactRouterDOM.Route;
+        const Router = ReactRouterDOM.BrowserRouter;
+        const Switch = ReactRouterDOM.Switch;
+        const NavLink = ReactRouterDOM.NavLink;
+
+
+        class About extends React.Component{
+            render(){
+                return (<h1>About</h1>);
+            }
+        }
+
+        class NotFound extends React.Component{
+            render(){
+                return (<h1>404 NotFound</h1>);
+            }
+        }
+
+        class MainPage extends React.Component{
+            render(){
+                return (<h1>MainPage</h1>);
+            }
+        }
+
+        class Human extends React.Component{
+            render(){
+                //const human_id = this.props.human_id; //<Human human_id={something} />
+                
+                const human_id = this.props.match.params.human_id; //from url
+                const human_name = this.props.match.params.name; //from url
+                return (<h1>Human {human_name} sub view with id {human_id}</h1>);
+            }
+        }  
+        //  full url bla/bla/bla?x=1&y=2
+        //  =
+        //  this.props.location.search => x=1&y=2
+        //   +
+        //  this.props.match.params => /bla/bla/bla
+        class Car extends React.Component{
+            render(){
+                return (
+                    <div>
+                        <h1>Car sub view</h1>
+                        <p>{JSON.stringify(this.props.match)}</p>
+                        <p>{JSON.stringify(this.props.match.params)}</p>
+                        <p>{this.props.match.params.car_id}</p>                        
+
+                        <p>{new URLSearchParams(this.props.location.search).get("name")}</p>                        
+
+                        <p>{new URLSearchParams(this.props.location.search).get("model")}</p>                        
+
+                    </div>
+                );
+            }
+        }         
+        
+        class Phones extends React.Component{
+            render(){
+                return (<h1>Phones sub view</h1>);
+            }
+        }  
+        
+        class AllInfo extends React.Component{
+            render(){
+                return (
+                    <div>
+                        <h1>AllInfo</h1>
+                        <h1>bla bla bla</h1>
+                        <h1>Layout</h1>
+                        <Switch>
+                            <Route   exact path="/allinfo/phones" component={Phones} />
+                            <Route  path="/allinfo/human/:human_id(\d+)-:name" component={Human} />
+                            <Route  path="/allinfo/car/:car_id/:p1/:p2" component={Car} />                                                        
+                            <Route  path="/allinfo/humans" component={Humans} />                                                                                    
+
+
+                        </Switch>
+                    </div>
+                    );
+            }
+        }           
+
+        class NavBar extends React.Component{
+            render(){
+
+                return(
+                    <nav>
+                        <NavLink to="/" activeClassName="active">Main page</NavLink>
+                        <NavLink to="/about" activeClassName="active">About</NavLink>
+                        <NavLink to="/allinfo" activeClassName="active">All info</NavLink>
+
+                    </nav>
+                );
+            }
+        }
+
+
+        //Database select
+
+        const humans = [
+
+            {id:1, name:"Bob"},
+            {id:2, name:"Boba"},
+            {id:3, name:"Boban"}
+
+        ];
+
+       
+        class Humans extends React.Component{
+            render(){
+                return (
+                <div>    
+                    <h1>List of Humans</h1>
+                    <ul>
+                        {
+                            humans.map(function(humnan){
+
+                                return ( 
+                                    <li key = {humnan.id}>
+                                        <NavLink to={`/allinfo/human/${humnan.id}-${humnan.name}` }>{humnan.name}</NavLink>
+                                    </li>
+
+                                )
+                            })       
+
+                        }
+                    </ul>
+
+                </div>
+                
+                );
+            }
+        }  
+
+
+        ReactDOM.render(
+            <Router>
+                <div>
+                    <NavBar/>
+                    <Switch>
+                        <Route exact path="/" component={MainPage} />
+                        <Route path="/allinfo" component={AllInfo} />                    
+                        <Route exact path="/about" component={About} />
+                        <Route component={NotFound} />
+                    </Switch>
+                </div>
+            </Router>    
+        
+        , document.getElementById('app'))
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>
