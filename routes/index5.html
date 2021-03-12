@@ -1,0 +1,82 @@
+<html>
+<head>
+    
+    <style>
+        .active{color:green}
+    </style>    
+    
+</head>
+
+<body>
+
+    <div id='app'></div>
+    
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.2.0/react-router-dom.min.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
+    <script type="text/babel">
+
+        const Route = ReactRouterDOM.Route;
+        const Router = ReactRouterDOM.BrowserRouter;
+        const Switch = ReactRouterDOM.Switch;
+        const NavLink = ReactRouterDOM.NavLink;
+        const Link = ReactRouterDOM.Link;
+        const Redirect  =  ReactRouterDOM.Redirect;
+
+
+        let is_loggin = false;
+
+
+        class MainPage extends React.Component{
+            render(){
+                if (!is_loggin)
+                    return <h1>MainPage</h1>;
+                
+                return <Redirect to="/login" />
+            }
+        }
+
+
+        class Login extends React.Component{
+            render(){
+
+                is_loggin = true;
+
+                return <h1>Welcome Y r login</h1>
+            }
+        }
+
+
+        ReactDOM.render(
+            <Router>
+                <div>
+                    <nav>
+                        <Link to="/">Main Page</Link>-
+                        <Link to="/login">Login</Link>-
+                        <Link to="/new2">New Main Page 2</Link>                                                
+                    </nav>
+                    <Switch>
+                        <Route exact path="/" component={MainPage} />
+                        <Route exact path="/login" component={Login} />                            
+                        <Redirect from="/new2"   to="/" />
+                    </Switch>
+                </div>
+            </Router>    
+        
+        , document.getElementById('app'))
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>
