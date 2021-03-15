@@ -1,8 +1,8 @@
-var AppView = require('../views/AppView.js');
-var Container = require('flux/utils');
-var React = require('react');
-var Action = require('../data/Actions.js');
-var HumanStorage = require('../data/HumanStorage.js');
+import AppView from '../views/AppView.js';
+import {Container} from 'flux/utils';
+import React from 'react';
+import Actions from '../data/Actions.js';
+import HumanStorage from '../data/HumanStorage.js';
 
 
 class AppContainer extends React.Component{
@@ -13,9 +13,9 @@ class AppContainer extends React.Component{
 
     static calculateState(prevState){
         return {
-                 humans:HumanStorage.getState(),
-                 onAddItem:Action.addItem,
-                 onRemoveItem:Action.removeItem
+                 humans:HumanStorage.getState(), //refresh DB
+                 onAddItem:Actions.addItem, //mapping
+                 onRemoveItem:Actions.removeItem //mapping
                 }
     }
 

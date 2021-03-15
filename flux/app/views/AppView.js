@@ -1,4 +1,4 @@
-var React = require('react');
+import React from 'react';
 
 class AppView extends React.Component{
     
@@ -12,18 +12,21 @@ class AppView extends React.Component{
 
 
     onChange(e){
-        this.setState({newItem:e.target.value})
+        this.setState( {newItem:e.target.value} )
 
     }
 
     onClick(e){
         if (this.state.newItem){
-            this.props.onAddItem(this.state.newItem)
+            this.props.onAddItem(this.state.newItem); //See mapping in Container => Action( human_name)
             this.setState({newItem:""})
         }
     }
     
     render(){
+
+
+        let prt_onRemoveItem = this.props.onRemoveItem;
         return(
             <div>
                 <input type="text" value = {this.state.newItem} onChange={this.onChange} />
@@ -35,8 +38,8 @@ class AppView extends React.Component{
                     {
                         this.props.humans.map(function(human){
                             return <Human key={human} 
-                                          name={human} 
-                                          onRemove = {this.props.onRemoveItem}/>;
+                                          human_name={human} 
+                                          onRemove = {prt_onRemoveItem} />; //See mapping in Container => Action( human_name)
                         })
                     }
                 </div>
@@ -50,19 +53,19 @@ class Human extends React.Component{
     constructor(props){
         super(props);
 
-        this.state = {name:props.name};
+        this.state = {human_name:props.human_name};
         this.onClick = this.onClick.bind(this);
     }
 
     onClick(e){
 
-        this.props.onRemove(this.state.name)
+        this.props.onRemove(this.state.human_name); //See mapping in Container => Action(human_name)
     }
 
     render(){
         return(
             <div>
-                <p>{this.state.name}</p>
+                <p>{this.state.human_name}</p>
                 <button onClick={this.onClick}>Delete</button>
             </div>
         );

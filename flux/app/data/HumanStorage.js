@@ -1,31 +1,28 @@
-var Immutable = require('immutable');
-var ReduceStore = require('flux/utils');
+import Immutable from "immutable";
+import {ReduceStore} from 'flux/utils';
 
-var Actions = require('./Actions.js');
-var ActionTypes = require('./ActionTypes.js');
-var HumanDispatcher = require('./HumanDispatcher.js');
+import Actions from './Actions.js';
+import ActionTypes from './ActionTypes.js';
+import HumanDispatcher from './HumanDispatcher.js';
 
 class HumanStorage extends ReduceStore{
 
     constructor(){
-        //subscribe
+        //subscribe, set store manager
         super(HumanDispatcher);
     }
-
     getInitialState(){
         return Immutable.List.of("Bob","Boba");
     }
-
     reduce(state, action){
-
         switch(action.type){
             case ActionTypes.ADD_ITEM:
-                if (action.data){
-                    return state.push(action.data);
+                if (action.human_name){
+                    return state.push(action.human_name);
                 }
                 return state;
             case ActionTypes.REMOVE_ITEM:
-                let index = state.indexOf(action.data);
+                let index = state.indexOf(action.human_name);
                 if (index>-1){
                     return state.delete(index);
                 }

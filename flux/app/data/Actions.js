@@ -1,15 +1,15 @@
-var ActionTypes = require('./ActionTypes.js')
-var HumanDispatcher = require('./HumanDispatcher.js');
+import ActionTypes from "./ActionTypes.js";
+import HumanDispatcher from "./HumanDispatcher.js";
 
-
+//mapping from Component action to Dispatcher Event => Store
 const Actions = {
 
-    addItem(text){
-        HumanDispatcher.dispatch( {type:ActionTypes.ADD_ITEM, data:text} );
+    addItem(human_name){
+        HumanDispatcher.dispatch( {type:ActionTypes.ADD_ITEM, human_name:human_name} );
     },
 
-    removeItem(text){
-        HumanDispatcher.dispatch( {type:ActionTypes.REMOVE_ITEM, data:text} );
+    removeItem(human_name){
+        HumanDispatcher.dispatch( {type:ActionTypes.REMOVE_ITEM, human_name:human_name} );
     }
 
 };
